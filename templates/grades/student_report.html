@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Report</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .student {
+            background: #eef2ff;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1f2937;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        .summary {
+            margin-top: 25px;
+            padding: 20px;
+            background: #e0f2fe;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            button {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        Student Examination Report
+    </h1>
+
+
+    <div class="student">
+
+        <p>
+            <strong>Roll Number:</strong>
+            {{ student.roll_number }}
+        </p>
+
+        <p>
+            <strong>Name:</strong>
+            {{ student.name }}
+        </p>
+
+        <p>
+            <strong>Department:</strong>
+            {{ student.department.name }}
+        </p>
+
+        <p>
+            <strong>Semester:</strong>
+            {{ student.semester.number }}
+        </p>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Subject</th>
+                <th>Credits</th>
+                <th>Marks</th>
+                <th>Grade</th>
+                <th>Grade Point</th>
+                <th>Result</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+        {% for item in report_data %}
+
+            <tr>
+
+                <td>
+                    {{ item.subject.code }} -
+                    {{ item.subject.name }}
+                </td>
+
+                <td>
+                    {{ item.credits }}
+                </td>
+
+                <td>
+                    {{ item.marks }}/100
+                </td>
+
+                <td>
+                    {{ item.letter_grade }}
+                </td>
+
+                <td>
+                    {{ item.grade_point }}
+                </td>
+
+                <td>
+
+                    {% if item.result == "PASS" %}
+
+                        <span class="pass">
+                            PASS
+                        </span>
+
+                    {% else %}
+
+                        <span class="fail">
+                            FAIL
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="6">
+                    No grades available.
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <div class="summary">
+
+        <h2>
+            CGPA: {{ cgpa }}
+        </h2>
+
+        <p>
+            Total Credits:
+            {{ total_credits }}
+        </p>
+
+    </div>
+
+
+    <button onclick="window.print()">
+        Print / Save as PDF
+    </button>
+
+</div>
+
+</body>
+
+</html>

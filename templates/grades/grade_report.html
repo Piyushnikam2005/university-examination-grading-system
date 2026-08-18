@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Grade Report</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .info {
+            background: #eef2ff;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1f2937;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Grade Report</h1>
+
+
+    <div class="info">
+
+        <p>
+            <strong>Subject:</strong>
+            {{ exam.subject.code }} -
+            {{ exam.subject.name }}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            {{ exam.exam_date }}
+        </p>
+
+        <p>
+            <strong>Room:</strong>
+            {{ exam.room.name }}
+        </p>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Roll Number</th>
+                <th>Student Name</th>
+                <th>Marks</th>
+                <th>Grade</th>
+                <th>Result</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+        {% for grade in grades %}
+
+            <tr>
+
+                <td>
+                    {{ grade.student.roll_number }}
+                </td>
+
+                <td>
+                    {{ grade.student.name }}
+                </td>
+
+                <td>
+                    {{ grade.marks }}/100
+                </td>
+
+                <td>
+                    {{ grade.letter_grade|default:"-" }}
+                </td>
+
+                <td>
+
+                    {% if grade.marks >= 40 %}
+
+                        <span class="pass">
+                            PASS
+                        </span>
+
+                    {% else %}
+
+                        <span class="fail">
+                            FAIL
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="5">
+                    No grades available.
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <a class="button" href="/">
+        Back to Home
+    </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grade Summary</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .info {
+            background: #eef2ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .cards {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 180px;
+            padding: 20px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .card h2 {
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #111827;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Grade Summary</h1>
+
+    <div class="info">
+
+        <p>
+            <strong>Subject:</strong>
+            {{ exam.subject.code }} -
+            {{ exam.subject.name }}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            {{ exam.exam_date }}
+        </p>
+
+        <p>
+            <strong>Room:</strong>
+            {{ exam.room.name }}
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Students</h3>
+            <h2>{{ total_students }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Passed</h3>
+            <h2>{{ passed_students }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Failed</h3>
+            <h2>{{ failed_students }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Average Marks</h3>
+            <h2>{{ average_marks }}</h2>
+        </div>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Roll Number</th>
+                <th>Student</th>
+                <th>Marks</th>
+                <th>Result</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for grade in grades %}
+
+            <tr>
+
+                <td>
+                    {{ grade.student.roll_number }}
+                </td>
+
+                <td>
+                    {{ grade.student.name }}
+                </td>
+
+                <td>
+                    {{ grade.marks }}
+                </td>
+
+                <td>
+
+                    {% if grade.marks >= 40 %}
+
+                        <span class="pass">
+                            PASS
+                        </span>
+
+                    {% else %}
+
+                        <span class="fail">
+                            FAIL
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+                <td colspan="4">
+                    No grades available.
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+
+</html>
