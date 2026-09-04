@@ -1,0 +1,310 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: #1e293b;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+        }
+
+        .sidebar ul li a:hover {
+            background: #334155;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            padding: 25px;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+        }
+
+        .profile {
+            color: #475569;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .blue {
+            border-left: 5px solid #3b82f6;
+        }
+
+        .green {
+            border-left: 5px solid #22c55e;
+        }
+
+        .orange {
+            border-left: 5px solid #f97316;
+        }
+
+        .red {
+            border-left: 5px solid #ef4444;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .table-container h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sidebar {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>My Dashboard</h2>
+
+        <ul>
+            <li><a href="#">🏠 Dashboard</a></li>
+            <li><a href="#">👤 Users</a></li>
+            <li><a href="#">📦 Products</a></li>
+            <li><a href="#">📊 Reports</a></li>
+            <li><a href="#">⚙️ Settings</a></li>
+            <li><a href="#">🚪 Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <h1>Dashboard</h1>
+            <div class="profile">
+                Welcome, Admin 👋
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="cards">
+
+            <div class="card blue">
+                <h3>Total Users</h3>
+                <p>1,250</p>
+            </div>
+
+            <div class="card green">
+                <h3>Total Sales</h3>
+                <p>₹85,400</p>
+            </div>
+
+            <div class="card orange">
+                <h3>Orders</h3>
+                <p>320</p>
+            </div>
+
+            <div class="card red">
+                <h3>Pending</h3>
+                <p>25</p>
+            </div>
+
+        </div>
+
+        <!-- Recent Users Table -->
+        <div class="table-container">
+
+            <h2>Recent Users</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Rahul Sharma</td>
+                        <td>rahul@example.com</td>
+                        <td>02 Sep 2026</td>
+                        <td>
+                            <span class="status active">Active</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Priya Patil</td>
+                        <td>priya@example.com</td>
+                        <td>01 Sep 2026</td>
+                        <td>
+                            <span class="status active">Active</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Amit Kumar</td>
+                        <td>amit@example.com</td>
+                        <td>31 Aug 2026</td>
+                        <td>
+                            <span class="status pending">Pending</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+```
